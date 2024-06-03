@@ -2,6 +2,12 @@
   padding: 1em;
 }
 
+.App h1{
+  text-align: center;
+  color: rgb(4, 145, 145);
+  margin-bottom: 2em;
+}
+
 .search{
   display: flex;
   margin-top: 1em;
