@@ -15,10 +15,14 @@ import debounce from "lodash.debounce";
 
 // Function to fetch colleges based on a search query
 const fetchColleges = async (searchQuery) => {
-  const response = await axios.get(
-    `http://universities.hipolabs.com/search?name=${searchQuery}`
-  );
-  return response.data;
+  try {
+    const response = await axios.get(
+      `http://universities.hipolabs.com/search?name=${searchQuery}`
+    );
+    return response.data;
+  } catch (error) {
+    throw new Error("Error fetching colleges");
+  }
 };
 
 // Function to fetch the logo of a college based on its domain
@@ -27,7 +31,7 @@ const fetchLogo = async (domain) => {
     const response = await axios.get(`https://logo.clearbit.com/${domain}`);
     return response.status === 200 ? response.config.url : null;
   } catch {
-    return <Alert severity="error">This is an error while fetching data from API</Alert>;
+    throw new Error("Error fetching logo");
   }
 };
 
@@ -40,13 +44,20 @@ const SearchComponent = () => {
   const [logo, setLogo] = useState(null);
   // State to indicate whether data is being loaded
   const [loading, setLoading] = useState(false);
+  // State to hold error messages
+  const [error, setError] = useState(null);
 
   // useEffect to load the list of colleges when the component mounts
   useEffect(() => {
     const loadColleges = async () => {
       setLoading(true);
-      const result = await fetchColleges("");
-      setColleges(result);
+      setError(null);
+      try {
+        const result = await fetchColleges("");
+        setColleges(result);
+      } catch (err) {
+        setError(err.message);
+      }
       setLoading(false);
     };
     loadColleges();
@@ -55,25 +66,35 @@ const SearchComponent = () => {
   // Function to handle search input changes, debounced to limit API calls
   const handleSearch = debounce(async (event, value) => {
     setLoading(true);
-    const result = await fetchColleges(value);
-    setColleges(result);
+    setError(null);
+    try {
+      const result = await fetchColleges(value);
+      setColleges(result);
+    } catch (err) {
+      setError(err.message);
+    }
     setLoading(false);
   }, 500);
 
   // Function to handle college selection from the dropdown
   const handleCollegeSelect = async (event, value) => {
     setSelectedCollege(value);
+    setLogo(null);
+    setError(null);
     if (value) {
       const domain = value.domains[0];
-      const logoUrl = await fetchLogo(domain);
-      setLogo(logoUrl);
-    } else {
-      setLogo(null);
+      try {
+        const logoUrl = await fetchLogo(domain);
+        setLogo(logoUrl);
+      } catch (err) {
+        setError(err.message);
+      }
     }
   };
 
   return (
     <Container>
+      {error && <Alert severity="error">{error}</Alert>}
       {/* Autocomplete component for searching and selecting colleges */}
       <Autocomplete
         options={colleges}
@@ -101,8 +122,6 @@ const SearchComponent = () => {
         )}
         style={{ marginTop: 20 }}
       />
-
-    
       {selectedCollege && (
         <Card style={{ marginTop: 20, display: "flex", alignItems: "center" }}>
           {/* Display the logo if available */}
