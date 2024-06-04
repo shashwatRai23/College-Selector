@@ -1,13 +1,26 @@
 # College Selector
 This project is a web interface built with React.js that allows users to search and select a college from a dropdown. After selecting a college, the interface displays the college's name, country, and logo on a dashboard.
 
-# Features
+# Table of Contents
+
+1. ⚙️ Tech Stack
+2. 🔋 Features
+3. 🤸 Quick Start
+4. 🤖 Usage
+
+# ⚙️ Tech Stack
+
+- React.js
+- Material UI
+- CSS
+
+# 🔋 Features
 - College Selection Dropdown: Searchable dropdown using Material-UI's Autocomplete component.
 - Display College Logo: Fetch and display the logo of the selected college.
 - Error Handling: Handle API request errors using Material-UI's Alert component.
 - Performance: Efficiently handles large datasets with debounce and loading states.
 
-# Installation
+# 🤸 Quick Start
 ## 1. Clone the repository
 ```sh
 git clone https://github.com/yourusername/college-search-dashboard.git
@@ -26,7 +39,7 @@ npm start
 ```
 The application will be available at http://localhost:3000.
 
-# Usage
+# 🤖 Usage
 ## Components
 - **SearchComponent:** The main component that contains the logic for searching and selecting colleges.
 ## State Management
