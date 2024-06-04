@@ -1,70 +1,70 @@
-# Getting Started with Create React App
+# College Selector
+This project is a web interface built with React.js that allows users to search and select a college from a dropdown. After selecting a college, the interface displays the college's name, country, and logo on a dashboard.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Features
+- College Selection Dropdown: Searchable dropdown using Material-UI's Autocomplete component.
+- Display College Logo: Fetch and display the logo of the selected college.
+- Error Handling: Handle API request errors using Material-UI's Alert component.
+- Performance: Efficiently handles large datasets with debounce and loading states.
 
-## Available Scripts
+# Installation
+## 1. Clone the repository
+```sh
+git clone https://github.com/yourusername/college-search-dashboard.git
+```
 
-In the project directory, you can run:
+```sh
+cd college-search-dashboard
+```
+## 2. Install dependencies:
+```sh
+npm install
+```
+## 3. Start the development server:
+```sh
+npm start
+```
+The application will be available at http://localhost:3000.
 
-### `npm start`
+# Usage
+## Components
+- **SearchComponent:** The main component that contains the logic for searching and selecting colleges.
+## State Management
+- **colleges:** List of colleges fetched from the API.
+- **selectedCollege:** The currently selected college from the dropdown.
+- **logo:** URL of the selected college's logo.
+- **loading:** Indicates whether data is being loaded.
+- **error:** Holds error messages for API request failures.
+## API Functions
+- **fetchColleges:** Fetches colleges based on the search query.
+  
+  ```js
+    const fetchColleges = async (searchQuery) => {
+      const response = await axios.get(`http://universities.hipolabs.com/search?name=${searchQuery}`);
+      return response.data;
+    };
+  ```
+- **fetchLogo:** Fetches the logo of a college based on its domain.
+  
+   ```js
+    const fetchLogo = async (domain) => {
+      try {
+        const response = await axios.get(`https://logo.clearbit.com/${domain}`);
+        return response.status === 200 ? response.config.url : null;
+      } catch {
+        throw new Error("Error fetching logo");
+      }
+   };
+  ```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Handling API Errors
+API errors are caught and displayed using Material-UI's "Alert" component.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+```js
+  {error && <Alert severity="error">{error}</Alert>}
+```
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+**Feel free to contribute to the project by submitting issues or pull requests!**
