@@ -1,6 +1,6 @@
 # College Selector
 This project is a web interface built with React.js that allows users to search and select a college from a dropdown. After selecting a college, the interface displays the college's name, country, and logo on a dashboard.
- ![Landing Page](public/assets/Screenshot(168).png)
+ ![Landing Page](public/assets/Screenshot (168).png)
 # Table of Contents
 
 1. ⚙️ Tech Stack
