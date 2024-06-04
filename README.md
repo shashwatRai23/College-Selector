@@ -24,7 +24,7 @@ This project is a web interface built with React.js that allows users to search 
 # 🤸 Quick Start
 ## 1. Clone the repository
 ```sh
-[git clone https://github.com/shashwatRai23/College-Selector.git](https://github.com/shashwatRai23/College-Selector.git)
+git clone https://github.com/shashwatRai23/College-Selector.git
 ```
 
 ```sh
